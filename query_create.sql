@@ -11,11 +11,6 @@ CREATE TABLE diet(
     name TEXT NOT NULL UNIQUE
 );
 
-CREATE TABLE swarm(
-    id SERIAL PRIMARY KEY,
-    name TEXT NOT NULL UNIQUE,
-    location_id INTEGER REFERENCES location(id) ON DELETE CASCADE
-);
 
 CREATE TABLE action(
     id SERIAL PRIMARY KEY,
@@ -41,6 +36,12 @@ CREATE TABLE location(
     biom_id INTEGER NOT NULL REFERENCES biom(id) ON DELETE CASCADE,
     parent_location_id INTEGER REFERENCES location(id)  ON DELETE CASCADE,
     CONSTRAINT parent_location_no_self_ref CHECK (parent_location_id <> id)
+);
+
+CREATE TABLE swarm(
+    id SERIAL PRIMARY KEY,
+    name TEXT NOT NULL UNIQUE,
+    location_id INTEGER REFERENCES location(id) ON DELETE CASCADE
 );
 
 CREATE TABLE dinosaur(
